@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 182b3d62e6ba3483aadc4d2dcc346a13
+guid: aeb2951ed1e0c486c84b59ac8aef5b1a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,84 +121,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: boxman Sprite Sheet_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 10
-        width: 90
-        height: 90
-      alignment: 9
-      pivot: {x: 0.43333334, y: 0.5555556}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e49a9c1640464cbd8aec1efb68009b1
-      internalID: -535884843
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: boxman Sprite Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 10
-        width: 90
-        height: 90
-      alignment: 9
-      pivot: {x: 0.4888889, y: 0.5555556}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2412f304fb7c94b219f90af9ec118f08
-      internalID: 572389694
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: boxman Sprite Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 10
-        width: 90
-        height: 90
-      alignment: 9
-      pivot: {x: 0.47777778, y: 0.5555556}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1232ebfeaf22c4d4988ad88b0d528836
-      internalID: 1382433450
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 44da458094d92459080897a847e02cc2
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      boxman Sprite Sheet_0: -535884843
-      boxman Sprite Sheet_1: 572389694
-      boxman Sprite Sheet_2: 1382433450
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
