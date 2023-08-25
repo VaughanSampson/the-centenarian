@@ -24,4 +24,5 @@ void loop() {
   distance1 = duration1 * 0.034 / 2;
 
   Serial.println(distance1);
+  
 }
