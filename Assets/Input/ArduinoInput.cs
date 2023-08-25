@@ -1,33 +1,50 @@
 using UnityEngine;
-using System.Collections;
-using System.IO;
+using System;
+using UnityEngine.Events;
 using System.IO.Ports;
 
 public class ArduinoInput : MonoBehaviour
 {
-	SerialPort sp = new SerialPort("COM3", 9600);
+	public static ArduinoInput instance;
 
+	SerialPort serialPort = new SerialPort("COM3", 9600);
+	public static int lastDistance = 0;
+
+	public static event Action<int> GetSingleInput;
+
+	/// <summary>
+    /// Intiate connection.
+    /// </summary>
 	void Start()
 	{
-		sp.Open();
-		sp.ReadTimeout = 1;
-		print("Start..");
+		if (instance)
+			Destroy(gameObject);
+
+		instance = this;
+
+		DontDestroyOnLoad(gameObject);
+
+		serialPort.Open();
+		serialPort.ReadTimeout = 1;
 	}
 
+	/// <summary>
+    /// Get input.
+    /// </summary>
 	void Update()
 	{
-		if (!sp.IsOpen)
-        	sp.Open ();
-        //currentInput = int.Parse (serial.ReadLine ());
-
+		if (!serialPort.IsOpen)
+        	serialPort.Open ();
 
 		try
 		{
-			print(sp.ReadLine());
+			int input = int.Parse(serialPort.ReadLine());
+			GetSingleInput?.Invoke(input);
 		}
-		catch (System.Exception e)
+		catch 
 		{
 			
 		}
 	}
+
 }
