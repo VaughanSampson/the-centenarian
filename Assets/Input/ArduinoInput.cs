@@ -11,16 +11,23 @@ public class ArduinoInput : MonoBehaviour
 	{
 		sp.Open();
 		sp.ReadTimeout = 1;
+		print("Start..");
 	}
 
 	void Update()
 	{
+		if (!sp.IsOpen)
+        	sp.Open ();
+        //currentInput = int.Parse (serial.ReadLine ());
+
+
 		try
 		{
 			print(sp.ReadLine());
 		}
-		catch (System.Exception)
+		catch (System.Exception e)
 		{
+			
 		}
 	}
 }
