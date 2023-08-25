@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class ArduinoInputTestCube : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class ArduinoInputTestCube : MonoBehaviour
     [SerializeField] private float y;
     [SerializeField] private int[] inputList;
     [SerializeField] private int inputListIndex;
+
+    private float lastTime, deltaTime;
 
     // Start is called before the first frame update
     void Start()
@@ -18,9 +21,14 @@ public class ArduinoInputTestCube : MonoBehaviour
 
 
     public void GetInput(int input) {
-        if (input > 60)
-            return;
-        input -= 30;
+        
+        deltaTime = Time.realtimeSinceStartup - lastTime;
+        lastTime = Time.realtimeSinceStartup;
+
+        print(deltaTime);
+
+        input = Mathf.Min(input, 60);
+            input -= 15;
 
 
         inputListIndex++;
@@ -34,9 +42,8 @@ public class ArduinoInputTestCube : MonoBehaviour
             y += i;
         y /= (float)inputList.Length;
 
-        rigid.AddForce(new Vector3(0,y/100f,0));
-        transform.position = new Vector3(0, Mathf.Clamp(transform.position.y, -5, 5), 0 );
-
+        rigid.AddForce(new Vector3(y*deltaTime*100,0,0));
+        print(y);
     }
 
 }

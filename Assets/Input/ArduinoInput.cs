@@ -42,7 +42,6 @@ public class ArduinoInput : MonoBehaviour
 		}
 		catch 
 		{
-			
 		}
 	}
 
