@@ -14,12 +14,9 @@ public class ArduinoInputTestCube : MonoBehaviour
     {
         ArduinoInput.GetSingleInput += GetInput;
 
-        inputList = new int[] {0,0,0,0,0};
+        inputList = new int[] {0,0,0,0,0,0,0,0,0,0,0,0};
     }
 
-    public void Update()
-    {
-    }
 
     public void GetInput(int input) {
         if (input > 60)
@@ -27,16 +24,16 @@ public class ArduinoInputTestCube : MonoBehaviour
 
         inputList[inputListIndex] = input;
         inputListIndex++;
-        if (inputListIndex > inputList.Length)
+        if (inputListIndex == inputList.Length -1)
             inputListIndex = 0;
 
-        int y = 0;
+        float y = 0;
 
         foreach (int i in inputList)
             y += i;
-        y /= inputList.Length;
+        y /= (float)inputList.Length;
 
-        transform.position = new Vector3(0, y, 0);
+        transform.position = new Vector3(0, y/10f, 0);
     }
 
 }
