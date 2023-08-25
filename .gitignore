@@ -4,6 +4,7 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
+[Ll]ibrary/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -72,3 +73,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+.vsconfig
+hacked-together-game/Packages/packages-lock.json
+hacked-together-game/Logs/Packages-Update.log
+hacked-together-game/Packages/manifest.json
