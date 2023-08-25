@@ -8,7 +8,6 @@ public class ArduinoInput : MonoBehaviour
 	public static ArduinoInput instance;
 
 	SerialPort serialPort = new SerialPort("COM3", 9600);
-	public static int lastDistance = 0;
 
 	public static event Action<int> GetSingleInput;
 
