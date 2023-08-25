@@ -1,10 +1,9 @@
-
 using System;
 using UnityEngine;
 
 public class ArduinoInputTestCube : MonoBehaviour
 {
-    [SerializeField] private float velocity;
+    [SerializeField] private Rigidbody rigid;
     [SerializeField] private float y;
     [SerializeField] private int[] inputList;
     [SerializeField] private int inputListIndex;
@@ -14,18 +13,20 @@ public class ArduinoInputTestCube : MonoBehaviour
     {
         ArduinoInput.GetSingleInput += GetInput;
 
-        inputList = new int[] {0,0,0,0,0,0,0,0,0,0,0,0};
+        inputList = new int[10];
     }
 
 
     public void GetInput(int input) {
         if (input > 60)
             return;
+        input -= 30;
 
-        inputList[inputListIndex] = input;
+
         inputListIndex++;
         if (inputListIndex == inputList.Length -1)
             inputListIndex = 0;
+        inputList[inputListIndex] = input;
 
         float y = 0;
 
@@ -33,7 +34,9 @@ public class ArduinoInputTestCube : MonoBehaviour
             y += i;
         y /= (float)inputList.Length;
 
-        transform.position = new Vector3(0, y/10f, 0);
+        rigid.AddForce(new Vector3(0,y/100f,0));
+        transform.position = new Vector3(0, Mathf.Clamp(transform.position.y, -5, 5), 0 );
+
     }
 
 }
