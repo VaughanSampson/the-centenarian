@@ -15,12 +15,6 @@ public class GameWorldGenerator : MonoBehaviour
 	[SerializeField] private float chunkSize = 50,  radius,  rejectionSamples, density;
 
 
-    public void Start()
-    {
-		Init(null);
-
-	}
-
     public void Init(ShipController playerShip)
     {
 		InitialLoad(Vector2.zero);

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &251941294641197200
+--- !u!1 &1706248842444538094
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,44 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6217452727845981818}
-  - component: {fileID: 8689062598424181847}
+  - component: {fileID: 5974282513527229465}
+  - component: {fileID: 560957716181540725}
   m_Layer: 0
-  m_Name: WorldGenerator
+  m_Name: GameController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6217452727845981818
+--- !u!4 &5974282513527229465
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 251941294641197200}
+  m_GameObject: {fileID: 1706248842444538094}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 87.94629, y: 17.683552, z: -0.72797024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8689062598424181847
+--- !u!114 &560957716181540725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 251941294641197200}
+  m_GameObject: {fileID: 1706248842444538094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eccac3bd011940d28828b82a18b4e70, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e41a74cdb6ad4966bb23d75e67128c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunkPrefab: {fileID: 2467406938686561257, guid: de149f5736b444ef1b03515b160a2315, type: 3}
-  chunkSize: 50
-  radius: 10
-  rejectionSamples: 10
-  density: 10
+  shipControllerPrefab: {fileID: 8102541320081400107, guid: bcc1770f5e77347e28b805db5d582aef, type: 3}
+  enemyControllerPrefab: {fileID: 0}
+  worldGeneratorPrefab: {fileID: 8689062598424181847, guid: 298478ffbafd44915b6cdfc1dc6de139, type: 3}

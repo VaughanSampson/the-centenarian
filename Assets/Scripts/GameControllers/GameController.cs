@@ -7,53 +7,66 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
 
-    public ShipController Player;
-    public EnemyController Enemies;
+    [SerializeField] private ShipController shipControllerPrefab;
+    [SerializeField] private EnemyController enemyControllerPrefab;
+    [SerializeField] private GameWorldGenerator worldGeneratorPrefab;
+
+    private ShipController shipController;
+    private EnemyController enemyController;
+    private GameWorldGenerator worldGenerator;
+
+    private int score;
+
+    public void AddScore(int amount)
+    {
+        score += amount;
+    }
+
+    private void Start()
+    {
+        Init();
+    }
 
     // Start is called before the first frame update
-    void Start()
+    void Init()
     {
-        Player.Init();
+        shipController = Instantiate(shipControllerPrefab);
+        shipController.Init();
 
-        Enemies.Init(Player);
+        worldGenerator = Instantiate(worldGeneratorPrefab);
+        worldGenerator.Init(shipController);
 
-        //Gnerat
+        enemyController = Instantiate(enemyControllerPrefab);
+        enemyController.Init(shipController);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FinishGame()
     {
+        // Set high score
+        if(PlayerPrefs.HasKey("HighScore"))
+        {
+            if (score > PlayerPrefs.GetInt("HighScore"))
+            {
+                PlayerPrefs.SetInt("HighScore", score);
+            }
+        }
+
+        // Show finish message
 
     }
 
+    public void Reset()
+    {
+        // Destroy old stuff
+        if (shipController)
+            Destroy(shipController.gameObject);
 
+        Destroy(worldGenerator.gameObject);
+        Destroy(enemyController.gameObject);
+
+        // Start game again
+        Init();
+    }
     
-
-    private void SetGameData(Data data)
-    {
-        DataCounting._instance.currentHealth.text = data.Health.ToString();
-        DataCounting._instance.currentScore.text = data.Score.ToString();
-        DataCounting._instance.HighestScore.text = data.HighestScore.ToString();
-    }
-
-
-
-    private void SaveByPlayerPrefs()
-    {
-        PlayerPrefs.SetInt("Hightestcore", DataCounting._instance.HighestScore);
-        PlayerPrefs.Save();
-    }
-    private void LoadByPlayerPrefs()
-    {
-        if (PlayerPrefs.HasKey("HighestScore"))
-        {
-            DataCounting._instance.currentScore.text = PlayerPrefs.GetInt("HighestScore").ToString();
-        }
-        else
-        {
-            Debug.Log("------Can not find the data------");
-        }
-
-    }
 }
 
