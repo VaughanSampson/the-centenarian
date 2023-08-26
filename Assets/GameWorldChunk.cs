@@ -10,7 +10,7 @@ public class GameWorldChunk : MonoBehaviour
 
     public float radius = 10;
     public Vector2 regionSize = new Vector2(size, size);
-    public int rejectionSamples = 10;
+    public int rejectionSamples = 30;
 
     private void Start()
     {
@@ -21,6 +21,7 @@ public class GameWorldChunk : MonoBehaviour
     {
         radius /= density;
         List<Vector2> points = PoissonDiscSampling.GeneratePoints(radius, regionSize, rejectionSamples);
+        points = PerlinNoiseFiltering.FilterPoints(points, transform.position, size, size / 10, 10);
 
         if (points != null)
         {

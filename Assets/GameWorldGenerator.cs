@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameWorldGenerator : MonoBehaviour
 {
@@ -32,6 +33,42 @@ public class GameWorldGenerator : MonoBehaviour
     public void LoadNew(Vector2 center)
     {
 
+    }
+
+}
+
+public static class PerlinNoiseFiltering{
+
+	public static List<Vector2> FilterPoints(List<Vector2> points, Vector2 basePosition, float areaSize, float edgeFilterWidth, float spread)
+    {
+		Vector2[] pointsArray = points.ToArray();
+		return pointsArray.Where(point => {
+
+			float noisePoint = GetNoisePoint(basePosition + point, spread);
+			if (point.x < edgeFilterWidth)
+				noisePoint -= 0.1f;
+			else
+			if (point.x > areaSize - edgeFilterWidth)
+				noisePoint -= 0.1f;
+
+
+			if (point.y < edgeFilterWidth)
+				noisePoint -= 0.1f;
+			else
+			if (point.y > areaSize - edgeFilterWidth)
+				noisePoint -= 0.1f;
+
+
+			if (noisePoint < 0.3f) return false;
+			if (noisePoint < + Random.Range(0,0.6f)) return false;
+			return true;
+
+		}).ToList();
+    }
+
+	private static float GetNoisePoint(Vector2 point, float spread)
+    {
+		return Mathf.PerlinNoise(point.x / spread, point.y / spread);
     }
 
 }
