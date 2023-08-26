@@ -42,7 +42,7 @@ public class ArduinoInputTestCube : MonoBehaviour
             y += i;
         y /= (float)inputList.Length;
 
-        rigid.AddForce(new Vector3(y*deltaTime*100,0,0));
+        rigid.AddForce(new Vector3(0,y*deltaTime*100,0));
         print(y);
     }
 
