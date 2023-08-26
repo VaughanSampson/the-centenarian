@@ -34,11 +34,18 @@ void loop() {
 
   distance1 = duration1 * 0.034 / 2;
 
-  Serial.print(distance1);
-  Serial.print(" ");
-  Serial.print(buttonState);
-  Serial.print(" ");
-  Serial.println(val);
+  //Serial.print(distance1);
+  //Serial.print(",");
+  //Serial.print(buttonState);
+  //Serial.print(",");
+  //Serial.println(val);
+
+  Serial.println("");
+  Serial.write(distance1);
+  Serial.print(",");
+  Serial.write(buttonState);
+  Serial.print(",");
+  Serial.write(val);
   //Serial.print("Distance: ");
   //Serial.println(distance1);
   //Serial.print("Button Status: ");

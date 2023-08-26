@@ -50,10 +50,14 @@ public class ArduinoInput : MonoBehaviour
 
 		try
 		{
-			string[] inputs = serialPort.ReadLine().Split(' ');
-			SendUltrasound?.Invoke(int.Parse(inputs[0]));
-			SendTrigger?.Invoke(!Convert.ToBoolean(int.Parse(inputs[1])));
-			SendDial?.Invoke(int.Parse(inputs[2]));
+			string serialReading = serialPort.ReadLine();
+			string[] inputs = serialReading.Split(",", StringSplitOptions.None);
+			print(serialReading);
+			print(inputs.Length);
+
+			//SendUltrasound?.Invoke(int.Parse(inputs[0]));
+			//SendTrigger?.Invoke(!Convert.ToBoolean(int.Parse(inputs[1])));
+			//SendDial?.Invoke(int.Parse(inputs[2]));
 		}
 		catch 
 		{
