@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] protected float speed = 1000f;
+    [SerializeField] protected float speed = 100.0f;
     [SerializeField] private Rigidbody2D rigidBody;
 
     public void Initiate()
