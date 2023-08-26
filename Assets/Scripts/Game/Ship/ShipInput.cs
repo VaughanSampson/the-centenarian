@@ -65,9 +65,9 @@ public class ShipInput : MonoBehaviour
     /// <param name="distance">Ultrasound measured distance.</param>
     public void Arduino_RecieveUltrasound(int distance)
     {
-        if (distance > 25 ) return;
+        if (distance > 10 ) return;
 
-        SetAccelerate?.Invoke(25f/(distance+1));
+        SetAccelerate?.Invoke(11f/(distance+1)/300f);
     }
 
     /// <summary>

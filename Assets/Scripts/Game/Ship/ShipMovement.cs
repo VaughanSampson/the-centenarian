@@ -18,6 +18,7 @@ public class ShipMovement : MonoBehaviour
     {
         controller.Input.SetAccelerate += Accelerate;
         controller.Input.SetTrigger += Trigger;
+        controller.Input.SetTurnAngle += AddTorque;
     }
 
     /// <summary>
@@ -31,7 +32,10 @@ public class ShipMovement : MonoBehaviour
 
     public void Trigger(bool down)
     {
-        print("FIRE!");
+        if(down)
+            transform.position = new Vector3(0,1,0);
+        else
+            transform.position = new Vector3(0,0,0); 
     }
 
     public void AddTorque(float torque)

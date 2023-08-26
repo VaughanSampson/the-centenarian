@@ -9,9 +9,6 @@ int distance1;
 
 int buttonState = 0;  // variable for reading the pushbutton status
 
-int distVal = 0;
-int buttonVal = 1;
-int potVal = 0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -22,7 +19,7 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly: 
+  // put your main code here, to run repeatedly:
 
   // read the state of the pushbutton and potentiometer value:
   buttonState = digitalRead(buttonPin);
@@ -38,23 +35,13 @@ void loop() {
 
   distance1 = duration1 * 0.034 / 2;
 
-  if (distance1 >= 0) {
-    distVal = distance1;
-  }
-
-  if (buttonState == 0) {
-    buttonVal = buttonState;
-  }
-
-  if (val >= 0) {
-    potVal = val;
-  }
-
-  Serial.print(distVal);
-  Serial.print(",");
-  Serial.print(buttonVal);
-  Serial.print(",");
-  Serial.println(potVal);
+  Serial.print("D");
+  Serial.println(distance1);
+  Serial.print("B");
+  Serial.println(buttonState);
+  Serial.print("G");
+  Serial.println(val);
+  
 
   //Serial.println("");
   //Serial.write(distVal);
