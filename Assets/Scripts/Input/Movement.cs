@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MoveByKeyboard : MonoBehaviour
 {
+    /*
     // Start is called before the first frame update
     public float moveSpeed = 5.0f;
 
@@ -24,4 +25,5 @@ public class MoveByKeyboard : MonoBehaviour
     {
         MovementController.OnMove -= HandleMove;
     }
+    */
 }
