@@ -19,6 +19,7 @@ public class ShipInput : MonoBehaviour
 
         KeyboardAndMouseInput.Accelerate += KB_ReceiveIsAccelerating;
         KeyboardAndMouseInput.Trigger += KB_ReceiveTrigger;
+        MainCoroutine.OnMainUpdate += KB_CalculateAndSendTurn;
 
         ArduinoInput.SendTrigger += Arduino_RecieveTrigger;
         ArduinoInput.SendUltrasound += Arduino_RecieveUltrasound;
@@ -50,10 +51,14 @@ public class ShipInput : MonoBehaviour
         SetTrigger?.Invoke(down);
     }
 
-    public void KB_CalculateAndSendTurn()
+    public void KB_CalculateAndSendTurn(float deltaTime)
     {
-
-        SetTurnAngle?.Invoke(0);
+        var dir = (Vector3)KeyboardAndMouseInput.MouseWorldPosition - lookSensor.position;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        lookSensor.rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
+        float zDif = lookSensor.localEulerAngles.z;
+        zDif -= 180;
+        SetTurnAngle?.Invoke(-zDif * deltaTime);
     }
 
 

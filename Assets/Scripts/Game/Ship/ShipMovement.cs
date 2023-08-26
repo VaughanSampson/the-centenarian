@@ -27,7 +27,7 @@ public class ShipMovement : MonoBehaviour
     /// <param name="force"> Force to push. </param>
     public void Accelerate(float force)
     {
-        rigidBody.AddForce(force * 100 * transform.up);
+        rigidBody.AddForce(force/10 * transform.up);
     }
 
     public void Trigger(bool down)

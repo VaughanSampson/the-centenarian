@@ -19,8 +19,6 @@ public class ArduinoInput : MonoBehaviour
 	void Start()
 	{
 
-		DontDestroyOnLoad(gameObject);
-
 		try
 		{
 			serialPort.Open();
