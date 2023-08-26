@@ -8,7 +8,12 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour
 {
 
+    [SerializeField] private float speed, rotateSpeed;
     [SerializeField] private Rigidbody2D rigidBody;
+    [SerializeField] private float acceleration, angularAcceleration;
+    public float Acceleration { get => acceleration; }
+    public float AngularAcceleration { get => angularAcceleration; }
+
 
     /// <summary>
     /// Sets up ShipInput.
@@ -16,18 +21,27 @@ public class ShipMovement : MonoBehaviour
     /// <param name="controller">Master controller of ship.</param>
     public void Init(ShipController controller)
     {
-        controller.Input.SetAccelerate += Accelerate;
+        controller.Input.SetAccelerate += SetAccelerate;
         controller.Input.SetTrigger += Trigger;
         controller.Input.SetTurnAngle += AddTorque;
+
+        MainCoroutine.OnMainUpdate += Accelerate;
     }
 
-    /// <summary>
-    /// Recieves force to add to rigidbody.
-    /// </summary>
-    /// <param name="force"> Force to push. </param>
-    public void Accelerate(float force)
+    private void OnDisable()
     {
-        rigidBody.AddForce(force/10 * transform.up);
+        MainCoroutine.OnMainUpdate -= Accelerate;
+    }
+
+    public void SetAccelerate(float acceleration)
+    {
+        this.acceleration = acceleration * speed;
+    }
+
+    public void Accelerate(float deltaTime)
+    {
+
+        rigidBody.AddForce(acceleration * deltaTime * transform.up);
     }
 
     public void Trigger(bool down)
@@ -40,6 +54,6 @@ public class ShipMovement : MonoBehaviour
 
     public void AddTorque(float torque)
     {
-        rigidBody.AddTorque(torque);
+        rigidBody.AddTorque(torque * rotateSpeed * Acceleration/ speed);
     }
 }
