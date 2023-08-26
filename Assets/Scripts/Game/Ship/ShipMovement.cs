@@ -2,17 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+/// <summary>
+/// Controls ship based on ShipInput
+/// </summary>
+public class ShipMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] private Rigidbody2D rigidBody;
+
+    /// <summary>
+    /// Sets up ShipInput.
+    /// </summary>
+    /// <param name="controller">Master controller of ship.</param>
+    public void Init(ShipController controller)
     {
-        
+        controller.Input.SetAccelerate += Accelerate;
+        controller.Input.SetTrigger += Trigger;
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Recieves force to add to rigidbody.
+    /// </summary>
+    /// <param name="force"> Force to push. </param>
+    public void Accelerate(float force)
     {
-        
+        rigidBody.AddForce(force * 100 * transform.up);
+    }
+
+    public void Trigger(bool down)
+    {
+        print("FIRE!");
+    }
+
+    public void AddTorque(float torque)
+    {
+        rigidBody.AddTorque(torque);
     }
 }

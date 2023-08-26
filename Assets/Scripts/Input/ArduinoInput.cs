@@ -9,7 +9,11 @@ public class ArduinoInput : MonoBehaviour
 
 	SerialPort serialPort = new SerialPort("COM3", 9600);
 
-	public static event Action<int> GetSingleInput;
+	public static event Action<bool> SendTrigger;
+	public static event Action<int> SendDial;
+	public static event Action<int> SendUltrasound;
+
+	public bool disabled;
 
 	/// <summary>
     /// Intiate connection.
@@ -23,8 +27,15 @@ public class ArduinoInput : MonoBehaviour
 
 		DontDestroyOnLoad(gameObject);
 
-		serialPort.Open();
-		serialPort.ReadTimeout = 1;
+		try
+		{
+			serialPort.Open();
+			serialPort.ReadTimeout = 1;
+		}
+		catch
+		{
+			disabled = true;
+		}
 	}
 
 	/// <summary>
@@ -32,17 +43,21 @@ public class ArduinoInput : MonoBehaviour
     /// </summary>
 	void Update()
 	{
+		if (disabled) return;
+
 		if (!serialPort.IsOpen)
         	serialPort.Open ();
 
 		try
 		{
-			int input = int.Parse(serialPort.ReadLine());
-			GetSingleInput?.Invoke(input);
+			string[] inputs = serialPort.ReadLine().Split(' ');
+			SendUltrasound?.Invoke(int.Parse(inputs[0]));
+			SendTrigger?.Invoke(!Convert.ToBoolean(int.Parse(inputs[1])));
+			SendDial?.Invoke(int.Parse(inputs[2]));
 		}
 		catch 
 		{
 		}
 	}
-
+	
 }
