@@ -476,6 +476,7 @@ GameObject:
   - component: {fileID: 8899614323415091057}
   - component: {fileID: 7911663042026615584}
   - component: {fileID: 3381772288101704999}
+  - component: {fileID: 8391641063014477842}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Player
@@ -595,6 +596,19 @@ MonoBehaviour:
   leftBoost: {fileID: 6263279850760521475}
   rightBoost: {fileID: 8735153025707369376}
   basicParticleRate: 1
+--- !u!114 &8391641063014477842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8646719835962342933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c726d60ae4954a438d21e138838249f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wreckage: {fileID: 6214174800424985095, guid: 58df4251aa47e40daa0a6cf42bc3cbff, type: 3}
 --- !u!1 &9070083335554944706
 GameObject:
   m_ObjectHideFlags: 0
