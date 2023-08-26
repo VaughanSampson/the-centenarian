@@ -8,6 +8,8 @@ using UnityEngine;
 public class ShipInput : MonoBehaviour
 {
 
+    [SerializeField] private Transform lookSensor;
+
     /// <summary>
     /// Sets up ShipInput.
     /// </summary>
@@ -25,7 +27,7 @@ public class ShipInput : MonoBehaviour
     }
 
     public event Action<float> SetAccelerate;
-    public event Action<float> SetTurn;
+    public event Action<float> SetTurnAngle;
     public event Action<bool> SetTrigger;
 
     // Keyboard and Mouse Input
@@ -50,7 +52,8 @@ public class ShipInput : MonoBehaviour
 
     public void KB_CalculateAndSendTurn()
     {
-        SetTurn?.Invoke(0);
+
+        SetTurnAngle?.Invoke(0);
     }
 
 
@@ -75,13 +78,13 @@ public class ShipInput : MonoBehaviour
     {
         if(rotation < 450)
         {
-            SetTurn?.Invoke(rotation-450);
+            SetTurnAngle?.Invoke(rotation-450);
 
         }
         else
         if (rotation > 610)
         {
-            SetTurn?.Invoke(rotation - 610);
+            SetTurnAngle?.Invoke(rotation - 610);
         }
     }
 
