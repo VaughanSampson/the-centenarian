@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainCoroutine : MonoBehaviour
 {
-    public event Action<float> OnMainUpdate;
+    public static event Action<float> OnMainUpdate;
     private float updateTimer = 0.05f;
 
     void Awake()

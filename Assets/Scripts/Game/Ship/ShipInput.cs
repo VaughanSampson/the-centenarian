@@ -16,18 +16,38 @@ public class ShipInput : MonoBehaviour
     /// <param name="controller">Master controller of ship.</param>
     public void Init(ShipController controller)
     {
+        if(!ArduinoInput.IsDisabled)
+            SetToArduinoInput();
+        else
+            SetToKeyboardInput();
+    }
 
-        KeyboardAndMouseInput.Accelerate += KB_ReceiveIsAccelerating;
-        KeyboardAndMouseInput.Trigger += KB_ReceiveTrigger;
+    public void SetToArduinoInput()
+    {
+        KeyboardAndMouseInput.Accelerate -= KB_ReceiveIsAccelerating;
+        KeyboardAndMouseInput.Trigger -= KB_ReceiveTrigger;
+        MainCoroutine.OnMainUpdate -= KB_CalculateAndSendTurn;
 
         ArduinoInput.SendTrigger += Arduino_RecieveTrigger;
         ArduinoInput.SendUltrasound += Arduino_RecieveUltrasound;
         ArduinoInput.SendDial += Arduino_RecieveDial;
-
     }
 
-    public event Action<float> SetAccelerate;
-    public event Action<float> SetTurnAngle;
+
+    public void SetToKeyboardInput()
+    {
+
+        KeyboardAndMouseInput.Accelerate += KB_ReceiveIsAccelerating;
+        KeyboardAndMouseInput.Trigger += KB_ReceiveTrigger;
+        MainCoroutine.OnMainUpdate += KB_CalculateAndSendTurn;
+
+        ArduinoInput.SendTrigger -= Arduino_RecieveTrigger;
+        ArduinoInput.SendUltrasound -= Arduino_RecieveUltrasound;
+        ArduinoInput.SendDial -= Arduino_RecieveDial;
+    }
+
+    public event Action<float> SetAcceleration;
+    public event Action<float> SetAngularAcceleration;
     public event Action<bool> SetTrigger;
 
     // Keyboard and Mouse Input
@@ -36,11 +56,11 @@ public class ShipInput : MonoBehaviour
     {
         if (!a)
         {
-            SetAccelerate?.Invoke(0);
+            SetAcceleration?.Invoke(0);
         }
         else
         {
-            SetAccelerate?.Invoke(1);
+            SetAcceleration?.Invoke(1);
         }
             
     }
@@ -50,10 +70,14 @@ public class ShipInput : MonoBehaviour
         SetTrigger?.Invoke(down);
     }
 
-    public void KB_CalculateAndSendTurn()
+    public void KB_CalculateAndSendTurn(float deltaTime)
     {
-
-        SetTurnAngle?.Invoke(0);
+        var dir = (Vector3)KeyboardAndMouseInput.MouseWorldPosition - lookSensor.position;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        lookSensor.rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
+        float zDif = lookSensor.localEulerAngles.z;
+        zDif -= 180;
+        SetAngularAcceleration?.Invoke(-zDif * deltaTime);
     }
 
 
@@ -67,7 +91,7 @@ public class ShipInput : MonoBehaviour
     {
         if (distance > 10 ) return;
 
-        SetAccelerate?.Invoke(11f/(distance+1)/300f);
+        SetAcceleration?.Invoke(11f/(MathF.Pow(distance+1,2f)));
     }
 
     /// <summary>
@@ -78,13 +102,13 @@ public class ShipInput : MonoBehaviour
     {
         if(rotation < 450)
         {
-            SetTurnAngle?.Invoke(rotation-450);
+            SetAngularAcceleration?.Invoke((rotation-450f)/100f);
 
         }
         else
         if (rotation > 610)
         {
-            SetTurnAngle?.Invoke(rotation - 610);
+            SetAngularAcceleration?.Invoke((rotation - 610f)/100f);
         }
     }
 

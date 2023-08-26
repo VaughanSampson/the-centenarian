@@ -8,7 +8,12 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour
 {
 
+    [SerializeField] private float speed, rotateSpeed;
     [SerializeField] private Rigidbody2D rigidBody;
+    [SerializeField] private float acceleration, angularAcceleration;
+    public float Acceleration { get => acceleration; }
+    public float AngularAcceleration { get => angularAcceleration; }
+
 
     /// <summary>
     /// Sets up ShipInput.
@@ -16,30 +21,45 @@ public class ShipMovement : MonoBehaviour
     /// <param name="controller">Master controller of ship.</param>
     public void Init(ShipController controller)
     {
-        controller.Input.SetAccelerate += Accelerate;
+        controller.Input.SetAcceleration += SetAccelerate;
         controller.Input.SetTrigger += Trigger;
-        controller.Input.SetTurnAngle += AddTorque;
+        controller.Input.SetAngularAcceleration += SetAngularAcceleration;
+
+        MainCoroutine.OnMainUpdate += Accelerate;
+        MainCoroutine.OnMainUpdate += AddTorque;
     }
 
-    /// <summary>
-    /// Recieves force to add to rigidbody.
-    /// </summary>
-    /// <param name="force"> Force to push. </param>
-    public void Accelerate(float force)
+    private void OnDisable()
     {
-        rigidBody.AddForce(force * 100 * transform.up);
+        MainCoroutine.OnMainUpdate -= Accelerate;
+        MainCoroutine.OnMainUpdate -= AddTorque;
+    }
+
+    public void SetAccelerate(float acceleration)
+    {
+        this.acceleration = acceleration * speed;
+    }
+
+    public void SetAngularAcceleration(float torque)
+    {
+        angularAcceleration = torque * rotateSpeed / speed;
+    }
+
+
+
+    public void Accelerate(float deltaTime)
+    {
+
+        rigidBody.AddForce(acceleration * deltaTime * transform.up);
     }
 
     public void Trigger(bool down)
     {
-        if(down)
-            transform.position = new Vector3(0,1,0);
-        else
-            transform.position = new Vector3(0,0,0); 
+
     }
 
-    public void AddTorque(float torque)
+    public void AddTorque(float deltaTime)
     {
-        rigidBody.AddTorque(torque);
+        rigidBody.AddTorque(angularAcceleration * Acceleration / deltaTime);
     }
 }
