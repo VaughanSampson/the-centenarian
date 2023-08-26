@@ -5,8 +5,6 @@ using System.IO.Ports;
 
 public class ArduinoInput : MonoBehaviour
 {
-	public static ArduinoInput instance;
-
 	SerialPort serialPort = new SerialPort("COM3", 9600);
 
 	public static event Action<bool> SendTrigger;
@@ -20,10 +18,6 @@ public class ArduinoInput : MonoBehaviour
     /// </summary>
 	void Start()
 	{
-		if (instance)
-			Destroy(gameObject);
-
-		instance = this;
 
 		DontDestroyOnLoad(gameObject);
 
