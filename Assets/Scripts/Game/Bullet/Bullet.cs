@@ -9,21 +9,19 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected float speed = 100.0f;
     [SerializeField] private Rigidbody2D rigidBody;
 
+    [SerializeField] private GameObject hitEffect;
+
     public void Initiate(Vector2 shooterVelocity)
     {
         rigidBody.AddForce(transform.up * speed + (Vector3)shooterVelocity);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.tag != "Enemy")
-        {
-            return; 
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        if (collision.tag == "Player" || collision.tag == "Bullet" || collision.tag == "Uranium Collectable") return;
+        Instantiate(hitEffect, transform.position, transform.rotation);
+        
+        Destroy(this.gameObject);
     }
 
     private void OnBecameInvisible()
