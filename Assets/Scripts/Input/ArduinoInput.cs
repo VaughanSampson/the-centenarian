@@ -11,6 +11,9 @@ public class ArduinoInput : MonoBehaviour
 	public static event Action<bool> SendTrigger;
 	public static event Action<int> SendDial;
 	public static event Action<int> SendUltrasound;
+	public static event Action Pause;
+	private int lastPauseValue;
+
 
 	private static bool isDisabled = false;
 	public static bool IsDisabled { get => isDisabled; }
@@ -20,7 +23,7 @@ public class ArduinoInput : MonoBehaviour
     /// </summary>
 	void Start()
 	{
-		if (instance != null && instance != this) return;
+		if (instance != null && instance != this) Destroy(this.gameObject);
 		instance = this;
 
 		try
@@ -53,7 +56,7 @@ public class ArduinoInput : MonoBehaviour
 		if (isDisabled) return;
 
 		if (!serialPort.IsOpen)
-        	serialPort.Open ();
+        	serialPort.Open();
 
 		try
 		{
@@ -70,12 +73,15 @@ public class ArduinoInput : MonoBehaviour
 				case 'G':
 					SendDial?.Invoke(int.Parse(serialReading.Substring(1)));
 					break;
-			}
+				case 'P':
+						int pValue = int.Parse(serialReading.Substring(1));
+						if(lastPauseValue == 1 && pValue == 0)
+							Pause?.Invoke();
+						lastPauseValue = pValue;
+					break;
+				}
 			}
 
-			//SendUltrasound?.Invoke(int.Parse(inputs[0]));
-			//SendTrigger?.Invoke(!Convert.ToBoolean(int.Parse(inputs[1])));
-			//SendDial?.Invoke(int.Parse(inputs[2]));
 		}
 		catch 
 		{

@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class GameWorldChunk : MonoBehaviour
 {
-    [SerializeField] public GameObject genObject;
+    [SerializeField] public ChunkGenObject[] genObjects;
 
     public void InitLoad(float size, float radius, int rejectionSamples , float density)
     {
+        int overallWieght = 0;
+        foreach (ChunkGenObject g in genObjects)
+            overallWieght += g.weight;
+
         Vector2 regionSize = new Vector2(size, size);
         radius /= density;
         List<Vector2> points = PoissonDiscSampling.GeneratePoints(radius, regionSize, rejectionSamples);
@@ -17,9 +21,29 @@ public class GameWorldChunk : MonoBehaviour
         {
             foreach (Vector2 point in points)
             {
+                int objectId = Random.Range(0, overallWieght);
+                GameObject genObject = genObjects[genObjects.Length-1].genObject;
+
+                foreach (ChunkGenObject g in genObjects)
+                {
+                    overallWieght -= g.weight;
+                    if (overallWieght <= 0)
+                    {
+                        genObject = g.genObject;
+                        break;
+                    }
+                }
+
                 GameObject o = Instantiate(genObject, transform);
                 o.transform.position = (Vector3)point + transform.position;
             }
         }
     }
+}
+
+
+[System.Serializable]
+public class ChunkGenObject{
+    [SerializeField] public int weight;
+    [SerializeField] public GameObject genObject;
 }

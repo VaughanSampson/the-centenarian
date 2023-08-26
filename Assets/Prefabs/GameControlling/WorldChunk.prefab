@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7855ce95ed96435c9c74d5a52e75c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  genObject: {fileID: 6886510509315943754, guid: 565f8944ff779404a9b8db68b6e46836, type: 3}
-  radius: 10
-  regionSize: {x: 50, y: 50}
-  rejectionSamples: 100
+  genObjects:
+  - weight: 5
+    genObject: {fileID: 6886510509315943754, guid: 565f8944ff779404a9b8db68b6e46836, type: 3}
+  - weight: 1
+    genObject: {fileID: 5594544515722214510, guid: c6f63599cd1fe42a3bccdd9ac9ca6237, type: 3}

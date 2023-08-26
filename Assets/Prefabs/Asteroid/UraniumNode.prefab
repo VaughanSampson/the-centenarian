@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4452392791908517181}
   - component: {fileID: 6432164959191035065}
   - component: {fileID: 7273736831829147346}
+  - component: {fileID: 2324264704290873178}
   m_Layer: 0
   m_Name: UraniumNode
   m_TagString: Untagged
@@ -97,4 +98,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcce1d4cb63343e78db9be1b8996051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectable: {fileID: 0}
+  collectable: {fileID: 6579665110936003227, guid: a3cfb4ec3535648abbac38b9992907c0, type: 3}
+--- !u!60 &2324264704290873178
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5594544515722214510}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.40625, y: 1.40625}
+    newSize: {x: 0.45, y: 0.45}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.2646147, y: 0.73329234}
+      - {x: -0.6126227, y: 0.33786798}
+      - {x: -0.7234992, y: 0.030805111}
+      - {x: -0.43161815, y: -0.39387274}
+      - {x: 0.06513414, y: -0.703125}
+      - {x: 0.39495534, y: -0.49195302}
+      - {x: 0.6126226, y: -0.40679133}
+      - {x: 0.74837613, y: -0.1060549}
+      - {x: 0.203125, y: 0.6126225}
+  m_UseDelaunayMesh: 0
