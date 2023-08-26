@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     private EnemyController enemyController;
     private GameWorldGenerator worldGenerator;
 
+    [SerializeField] private MainCameraController mainCameraController;
+
     private int score;
 
     public void AddScore(int amount)
@@ -24,7 +26,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        Init();
+        Invoke("Init", 0.05f);
     }
 
     // Start is called before the first frame update
@@ -38,6 +40,8 @@ public class GameController : MonoBehaviour
 
         enemyController = Instantiate(enemyControllerPrefab);
         enemyController.Init(shipController);
+
+        mainCameraController.Init(shipController);
     }
 
     public void FinishGame()

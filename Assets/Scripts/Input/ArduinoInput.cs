@@ -33,7 +33,7 @@ public class ArduinoInput : MonoBehaviour
 		{
 			try
 			{
-				serialPort = new SerialPort("/dev/cu.usbmodem1401", 9600);
+				serialPort = new SerialPort("/dev/cu.usbmodem1101", 9600);
 				serialPort.Open();
 				serialPort.ReadTimeout = 1;
 			}

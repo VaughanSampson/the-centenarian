@@ -10,10 +10,12 @@ public class ShipMovement : MonoBehaviour
 
     [SerializeField] private float speed, rotateSpeed;
     [SerializeField] private Rigidbody2D rigidBody;
+    public Rigidbody2D RigidBody { get => rigidBody;  }
     [SerializeField] private float acceleration, angularAcceleration;
     public float Acceleration { get => acceleration; }
     public float AngularAcceleration { get => angularAcceleration; }
 
+    [SerializeField] private float accelerationDecay = 0.01f;
 
     /// <summary>
     /// Sets up ShipInput.
@@ -49,7 +51,10 @@ public class ShipMovement : MonoBehaviour
 
     public void Accelerate(float deltaTime)
     {
-
+        if (acceleration > 0)
+            acceleration -= accelerationDecay * deltaTime;
+        else
+            acceleration = 0;
         rigidBody.AddForce(acceleration * deltaTime * transform.up);
     }
 

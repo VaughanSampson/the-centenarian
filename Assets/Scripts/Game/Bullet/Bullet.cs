@@ -9,10 +9,9 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected float speed = 100.0f;
     [SerializeField] private Rigidbody2D rigidBody;
 
-    public void Initiate()
+    public void Initiate(Vector2 shooterVelocity)
     {
-        //transform.Translate(new Vector2(0, speed * Time.deltaTime));
-        rigidBody.AddForce(transform.up * speed);
+        rigidBody.AddForce(transform.up * speed + (Vector3)shooterVelocity);
     }
 
     private void OnTriggerEnter(Collider other)

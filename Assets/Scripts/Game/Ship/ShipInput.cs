@@ -19,7 +19,7 @@ public class ShipInput : MonoBehaviour
         if(!ArduinoInput.IsDisabled)
             SetToArduinoInput();
         else
-            SetToKeyboardInput();
+            SetToKeyboardInput();   
     }
 
     public void SetToArduinoInput()
@@ -36,7 +36,7 @@ public class ShipInput : MonoBehaviour
 
     public void SetToKeyboardInput()
     {
-
+        print("subscribe");
         KeyboardAndMouseInput.Accelerate += KB_ReceiveIsAccelerating;
         KeyboardAndMouseInput.Trigger += KB_ReceiveTrigger;
         MainCoroutine.OnMainUpdate += KB_CalculateAndSendTurn;

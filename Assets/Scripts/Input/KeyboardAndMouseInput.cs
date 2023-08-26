@@ -10,8 +10,10 @@ public class KeyboardAndMouseInput : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
+        {
             Trigger?.Invoke(true);
+        }
         else
         if (Input.GetKeyUp(KeyCode.E))
             Trigger?.Invoke(false);

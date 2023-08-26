@@ -12,10 +12,12 @@ public class GameWorldGenerator : MonoBehaviour
 
 	[SerializeField] private GameWorldChunk[,] chunkMap = new GameWorldChunk[3,3];
 
-	[SerializeField] private float chunkSize = 50,  radius,  rejectionSamples, density;
+	[SerializeField] private float chunkSize = 50,  radius, density;
+	[SerializeField] private int rejectionSamples;
 
 
-    public void Init(ShipController playerShip)
+
+	public void Init(ShipController playerShip)
     {
 		InitialLoad(Vector2.zero);
 		StartCoroutine("GenerationLoop");
@@ -38,7 +40,7 @@ public class GameWorldGenerator : MonoBehaviour
 		Vector2 position = centre - new Vector2(size * (i - 1), size * (j - 1));
 		chunkMap[i, j] = Instantiate(chunkPrefab, position, Quaternion.identity);
 		chunkMap[i, j].transform.parent = transform;
-		chunkMap[i, j].InitLoad(size, 10, 10, 4);
+		chunkMap[i, j].InitLoad(size, radius, rejectionSamples, density);
 	}
 
     IEnumerator GenerationLoop()
