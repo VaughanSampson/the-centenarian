@@ -21,22 +21,31 @@ public class ShipMovement : MonoBehaviour
     /// <param name="controller">Master controller of ship.</param>
     public void Init(ShipController controller)
     {
-        controller.Input.SetAccelerate += SetAccelerate;
+        controller.Input.SetAcceleration += SetAccelerate;
         controller.Input.SetTrigger += Trigger;
-        controller.Input.SetTurnAngle += AddTorque;
+        controller.Input.SetAngularAcceleration += SetAngularAcceleration;
 
         MainCoroutine.OnMainUpdate += Accelerate;
+        MainCoroutine.OnMainUpdate += AddTorque;
     }
 
     private void OnDisable()
     {
         MainCoroutine.OnMainUpdate -= Accelerate;
+        MainCoroutine.OnMainUpdate -= AddTorque;
     }
 
     public void SetAccelerate(float acceleration)
     {
         this.acceleration = acceleration * speed;
     }
+
+    public void SetAngularAcceleration(float torque)
+    {
+        angularAcceleration = torque * rotateSpeed / speed;
+    }
+
+
 
     public void Accelerate(float deltaTime)
     {
@@ -46,14 +55,11 @@ public class ShipMovement : MonoBehaviour
 
     public void Trigger(bool down)
     {
-        if(down)
-            transform.position = new Vector3(0,1,0);
-        else
-            transform.position = new Vector3(0,0,0); 
+
     }
 
-    public void AddTorque(float torque)
+    public void AddTorque(float deltaTime)
     {
-        rigidBody.AddTorque(torque * rotateSpeed * Acceleration/ speed);
+        rigidBody.AddTorque(angularAcceleration * Acceleration / deltaTime);
     }
 }
