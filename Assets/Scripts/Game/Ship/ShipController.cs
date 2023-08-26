@@ -16,10 +16,6 @@ public class ShipController : MonoBehaviour
     [SerializeField] private Transform centrePoint;
     public Vector3 CentrePoint { get => centrePoint.position; }
 
-    private void Start()
-    {
-        Init();
-    }
 
     /// <summary>
     /// Start all of the ships processes.
