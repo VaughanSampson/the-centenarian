@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class KeyboardAndMouseInput : MonoBehaviour
@@ -11,17 +10,18 @@ public class KeyboardAndMouseInput : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.e))
+        if(Input.GetKeyDown(KeyCode.E))
             fire?.Invoke();
 
         mouseScreenPosition = Input.mousePosition;
-        Debug.Log("Mouse Position: " + mousePosition);
+        mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+
+        Debug.Log("Mouse Position: " + mouseWorldPosition);
 
         Accelerator();
     }
 
-    float Accelerator(){
-
+    void Accelerator(){
         if (Input.GetKeyDown(KeyCode.Space))
         {
             accelerate?.Invoke(true);
@@ -32,6 +32,5 @@ public class KeyboardAndMouseInput : MonoBehaviour
             accelerate?.Invoke(false);
 
         }
-
     }
 }
