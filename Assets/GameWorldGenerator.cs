@@ -8,34 +8,82 @@ public class GameWorldGenerator : MonoBehaviour
     private ShipController playerShip;
     private float loopDelay = 10f;
 
+	[SerializeField] private GameWorldChunk chunkPrefab;
+
+	[SerializeField] private GameWorldChunk[,] chunkMap = new GameWorldChunk[3,3];
+
+	[SerializeField] private float chunkSize = 50,  radius,  rejectionSamples, density;
+
+
+    public void Start()
+    {
+		Init(null);
+
+	}
+
     public void Init(ShipController playerShip)
     {
-        StartCoroutine("GenerationLoop");
+		InitialLoad(Vector2.zero);
+		StartCoroutine("GenerationLoop");
         this.playerShip = playerShip;
     }
+
+	public void InitialLoad(Vector2 centre)
+    {
+		for(int i = 0; i < chunkMap.GetLength(0); i++)
+		{
+			for (int j = 0; j < chunkMap.GetLength(1); j++)
+			{
+				CreateChunk(chunkSize, centre, i, j);
+			}
+		}
+	}
+
+	public void CreateChunk(float size, Vector2 centre, int i, int j)
+    {
+		Vector2 position = centre - new Vector2(size * (i - 1), size * (j - 1));
+		chunkMap[i, j] = Instantiate(chunkPrefab, position, Quaternion.identity);
+		chunkMap[i, j].transform.parent = transform;
+		chunkMap[i, j].InitLoad(size, 10, 10, 4);
+	}
 
     IEnumerator GenerationLoop()
     {
         while (true)
         {
             yield return new WaitForSeconds(loopDelay);
-            Vector2 center = playerShip.transform.position;
-
+            //Vector2 center = playerShip.transform.position;
         }
     }
 
-    public void UnloadOld(Vector2 center)
-    {
-        
-    }
+    public void ReloadIfNeeded(Vector2 center)
+	{
+		/*
+		if(center.x - chunkSize * 2 > chunkMap[0,0].transform.position.x )
+        {
+
+        }
+		else
+		if (center.x + chunkSize * 2 < chunkMap[2, 2].transform.position.x)
+		{
+
+		}
+		*/
+	}
 
 
     public void LoadNew(Vector2 center)
     {
-
+		
     }
 
+
+
 }
+
+
+
+
 
 public static class PerlinNoiseFiltering{
 

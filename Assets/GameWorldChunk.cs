@@ -6,19 +6,9 @@ public class GameWorldChunk : MonoBehaviour
 {
     [SerializeField] public GameObject genObject;
 
-    public const int size = 10;
-
-    public float radius = 10;
-    public Vector2 regionSize = new Vector2(size, size);
-    public int rejectionSamples = 30;
-
-    private void Start()
+    public void InitLoad(float size, float radius, int rejectionSamples , float density)
     {
-        Load(4);
-    }
-
-    public void Load(int density)
-    {
+        Vector2 regionSize = new Vector2(size, size);
         radius /= density;
         List<Vector2> points = PoissonDiscSampling.GeneratePoints(radius, regionSize, rejectionSamples);
         points = PerlinNoiseFiltering.FilterPoints(points, transform.position, size, size / 10, 10);
