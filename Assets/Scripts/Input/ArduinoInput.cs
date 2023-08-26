@@ -44,10 +44,21 @@ public class ArduinoInput : MonoBehaviour
 
 		try
 		{
-			string serialReading = serialPort.ReadLine();
-			string[] inputs = serialReading.Split(",", StringSplitOptions.None);
-			print(serialReading);
-			print(inputs.Length);
+			while(true){
+			string serialReading = serialPort.ReadLine(); 
+			
+			switch (serialReading[0]){
+				case 'D':
+					SendUltrasound?.Invoke(int.Parse(serialReading.Substring(1)));
+					break;
+				case 'B':
+					SendTrigger?.Invoke(!Convert.ToBoolean(int.Parse(serialReading.Substring(1))));
+					break;
+				case 'G':
+					SendDial?.Invoke(int.Parse(serialReading.Substring(1)));
+					break;
+			}
+			}
 
 			//SendUltrasound?.Invoke(int.Parse(inputs[0]));
 			//SendTrigger?.Invoke(!Convert.ToBoolean(int.Parse(inputs[1])));
