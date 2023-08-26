@@ -17,6 +17,7 @@ public class ShipMovement : MonoBehaviour
     public void Init(ShipController controller)
     {
         controller.Input.SetAccelerate += Accelerate;
+        controller.Input.SetTrigger += Trigger;
     }
 
     /// <summary>
@@ -26,5 +27,15 @@ public class ShipMovement : MonoBehaviour
     public void Accelerate(float force)
     {
         rigidBody.AddForce(force * 100 * transform.up);
+    }
+
+    public void Trigger(bool down)
+    {
+        print("FIRE!");
+    }
+
+    public void AddTorque(float torque)
+    {
+        rigidBody.AddTorque(torque);
     }
 }

@@ -18,11 +18,15 @@ public class ShipInput : MonoBehaviour
         KeyboardAndMouseInput.Accelerate += KB_ReceiveIsAccelerating;
         KeyboardAndMouseInput.Trigger += KB_ReceiveTrigger;
 
+        ArduinoInput.SendTrigger += Arduino_RecieveTrigger;
+        ArduinoInput.SendUltrasound += Arduino_RecieveUltrasound;
+        ArduinoInput.SendDial += Arduino_RecieveDial;
+
     }
 
     public event Action<float> SetAccelerate;
     public event Action<float> SetTurn;
-    public event Action Trigger;
+    public event Action<bool> SetTrigger;
 
     // Keyboard and Mouse Input
 
@@ -39,9 +43,9 @@ public class ShipInput : MonoBehaviour
             
     }
 
-    public void KB_ReceiveTrigger()
+    public void KB_ReceiveTrigger(bool down)
     {
-        Trigger?.Invoke();
+        SetTrigger?.Invoke(down);
     }
 
     public void KB_CalculateAndSendTurn()
@@ -58,24 +62,35 @@ public class ShipInput : MonoBehaviour
     /// <param name="distance">Ultrasound measured distance.</param>
     public void Arduino_RecieveUltrasound(int distance)
     {
-        SetAccelerate?.Invoke(distance);
+        if (distance > 25) return;
+
+        SetAccelerate?.Invoke(25f/distance);
     }
 
     /// <summary>
     /// Gets Arduino dial turn input.
     /// </summary>
     /// <param name="rotation"></param>
-    public void Arduino_RecieveDial(float rotation)
+    public void Arduino_RecieveDial(int rotation)
     {
-        SetTurn?.Invoke(rotation);
+        if(rotation < 450)
+        {
+            SetTurn?.Invoke(rotation-450);
+
+        }
+        else
+        if (rotation > 610)
+        {
+            SetTurn?.Invoke(rotation - 610);
+        }
     }
 
     /// <summary>
     /// Gets trigger from Arduino input.
     /// </summary>
-    public void Arduino_RecieveTrigger()
+    public void Arduino_RecieveTrigger(bool down)
     {
-        Trigger?.Invoke();
+        SetTrigger?.Invoke(down);
     }
 
 }

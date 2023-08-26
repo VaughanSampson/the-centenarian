@@ -14,7 +14,7 @@ public class ArduinoInputTestCube : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ArduinoInput.GetSingleInput += GetInput;
+        ArduinoInput.SendUltrasound += GetInput;
 
         inputList = new int[10];
     }
