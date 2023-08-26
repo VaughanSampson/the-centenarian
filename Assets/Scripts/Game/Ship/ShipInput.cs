@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class ShipInput : MonoBehaviour
 {
-    private ShipController controller;
 
     /// <summary>
     /// Sets up ShipInput.
@@ -15,12 +14,43 @@ public class ShipInput : MonoBehaviour
     /// <param name="controller">Master controller of ship.</param>
     public void Init(ShipController controller)
     {
-        this.controller = controller;
+
+        KeyboardAndMouseInput.Accelerate += KB_ReceiveIsAccelerating;
+        KeyboardAndMouseInput.Trigger += KB_ReceiveTrigger;
+
     }
 
-    public event Action<float> setAccelerate;
-    public event Action<float> setTurn;
-    public event Action trigger;
+    public event Action<float> SetAccelerate;
+    public event Action<float> SetTurn;
+    public event Action Trigger;
+
+    // Keyboard and Mouse Input
+
+    public void KB_ReceiveIsAccelerating(bool a)
+    {
+        if (!a)
+        {
+            SetAccelerate?.Invoke(0);
+        }
+        else
+        {
+            SetAccelerate?.Invoke(1);
+        }
+            
+    }
+
+    public void KB_ReceiveTrigger()
+    {
+        Trigger?.Invoke();
+    }
+
+    public void KB_CalculateAndSendTurn()
+    {
+        SetTurn?.Invoke(0);
+    }
+
+
+    // Arduino Input
 
     /// <summary>
     /// Gets Arduino ultrasound distance input.
@@ -28,7 +58,7 @@ public class ShipInput : MonoBehaviour
     /// <param name="distance">Ultrasound measured distance.</param>
     public void Arduino_RecieveUltrasound(int distance)
     {
-        setAccelerate?.Invoke(distance);
+        SetAccelerate?.Invoke(distance);
     }
 
     /// <summary>
@@ -37,7 +67,7 @@ public class ShipInput : MonoBehaviour
     /// <param name="rotation"></param>
     public void Arduino_RecieveDial(float rotation)
     {
-        setTurn?.Invoke(rotation);
+        SetTurn?.Invoke(rotation);
     }
 
     /// <summary>
@@ -45,7 +75,7 @@ public class ShipInput : MonoBehaviour
     /// </summary>
     public void Arduino_RecieveTrigger()
     {
-        trigger?.Invoke();
+        Trigger?.Invoke();
     }
 
 }

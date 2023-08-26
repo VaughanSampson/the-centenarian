@@ -11,6 +11,8 @@ public class ArduinoInput : MonoBehaviour
 
 	public static event Action<int> GetSingleInput;
 
+	public bool disabled;
+
 	/// <summary>
     /// Intiate connection.
     /// </summary>
@@ -23,8 +25,15 @@ public class ArduinoInput : MonoBehaviour
 
 		DontDestroyOnLoad(gameObject);
 
-		serialPort.Open();
-		serialPort.ReadTimeout = 1;
+		try
+		{
+			serialPort.Open();
+			serialPort.ReadTimeout = 1;
+		}
+		catch
+		{
+			disabled = true;
+		}
 	}
 
 	/// <summary>
@@ -32,6 +41,8 @@ public class ArduinoInput : MonoBehaviour
     /// </summary>
 	void Update()
 	{
+		if (disabled) return;
+
 		if (!serialPort.IsOpen)
         	serialPort.Open ();
 

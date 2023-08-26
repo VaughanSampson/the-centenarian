@@ -3,33 +3,31 @@ using UnityEngine;
 
 public class KeyboardAndMouseInput : MonoBehaviour
 {
-    public static event Action fire;
-    public static event Action<bool> accelerate;
-    public static Vector2 mouseScreenPosition;
-    public static Vector2 mouseWorldPosition;
+    public static event Action Trigger;
+    public static event Action<bool> Accelerate;
+    public static Vector2 MouseScreenPosition;
+    public static Vector2 MouseWorldPosition;
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.E))
-            fire?.Invoke();
+            Trigger?.Invoke();
 
-        mouseScreenPosition = Input.mousePosition;
-        mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        MouseScreenPosition = Input.mousePosition;
+        MouseWorldPosition = Camera.main.ScreenToWorldPoint(MouseScreenPosition);
 
-        Debug.Log("Mouse Position: " + mouseWorldPosition);
-
-        Accelerator();
+        GetAccelerate();
     }
 
-    void Accelerator(){
+    void GetAccelerate(){
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            accelerate?.Invoke(true);
+            Accelerate?.Invoke(true);
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            accelerate?.Invoke(false);
+            Accelerate?.Invoke(false);
 
         }
     }
