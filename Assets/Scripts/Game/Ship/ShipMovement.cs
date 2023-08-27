@@ -17,6 +17,8 @@ public class ShipMovement : MonoBehaviour
 
     [SerializeField] private float accelerationDecay = 0.01f;
 
+    [SerializeField] private AudioSource engineAudio;
+
     /// <summary>
     /// Sets up ShipInput.
     /// </summary>
@@ -58,6 +60,8 @@ public class ShipMovement : MonoBehaviour
             acceleration -= accelerationDecay * deltaTime;
         else
             acceleration = 0;
+
+        engineAudio.volume = Mathf.Min(acceleration / 100f, 1f);
         rigidBody.AddForce(acceleration * deltaTime * transform.up);
     }
 
