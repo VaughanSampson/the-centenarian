@@ -48,6 +48,10 @@ public class GameController : MonoBehaviour
     void Init()
     {
 
+        KeyboardAndMouseInput.EscapeCalled += TogglePause;
+        if (!ArduinoInput.IsDisabled)
+            ArduinoInput.Pause += TogglePause;
+
         shipController = Instantiate(shipControllerPrefab);
         shipController.Init();
 
@@ -59,9 +63,6 @@ public class GameController : MonoBehaviour
 
         mainCameraController.Init(shipController);
 
-        KeyboardAndMouseInput.EscapeCalled += TogglePause;
-        if(!ArduinoInput.IsDisabled)
-            ArduinoInput.Pause += TogglePause;
 
         pausable = true;
     }
@@ -96,12 +97,17 @@ public class GameController : MonoBehaviour
         OnReset.Invoke();
         SetScore(0);
         restartMenu.gameObject.SetActive(false);
+
         // Destroy old stuff
         if (shipController)
             Destroy(shipController.gameObject);
 
         Destroy(worldGenerator.gameObject);
         Destroy(enemyController.gameObject);
+
+
+        KeyboardAndMouseInput.EscapeCalled -= TogglePause;
+        ArduinoInput.Pause -= TogglePause;
 
         // Start game again
         Init();
@@ -120,7 +126,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            if(pausable)
+            if (pausable)
                 Pause();
         }
     }
