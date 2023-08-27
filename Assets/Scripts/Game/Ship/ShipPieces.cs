@@ -9,6 +9,7 @@ public class ShipPieces : MonoBehaviour
     public void Init()
     {
         rigidBody.AddForce(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 150f);
-        transform.Rotate(0, 0, Random.Range(-20, 20f)); 
+        transform.Rotate(0, 0, Random.Range(-20, 20f));
     }
+
 }

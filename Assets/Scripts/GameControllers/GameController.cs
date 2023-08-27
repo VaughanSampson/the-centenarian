@@ -23,10 +23,19 @@ public class GameController : MonoBehaviour
     private int score;
     public static event Action<int> OnScoreChange;
 
+
+    public static event Action OnReset;
+
     public void AddScore(int amount)
     {
         score += amount;
-        OnScoreChange.Invoke(amount);
+        OnScoreChange?.Invoke(score);
+    }
+
+    public void SetScore(int amount)
+    {
+        score = amount;
+        OnScoreChange?.Invoke(amount);
     }
 
     private void Start()
@@ -67,6 +76,7 @@ public class GameController : MonoBehaviour
     {
         
         restartMenu.gameObject.SetActive(true);
+
         pausable = false;
 
         // Set high score
@@ -78,12 +88,13 @@ public class GameController : MonoBehaviour
             }
         }
 
-        // Show finish message
 
     }
 
     public void Reset()
     {
+        OnReset.Invoke();
+        SetScore(0);
         restartMenu.gameObject.SetActive(false);
         // Destroy old stuff
         if (shipController)
