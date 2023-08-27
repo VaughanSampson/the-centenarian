@@ -102,7 +102,7 @@ public class ShipInput : MonoBehaviour
     {
         if (distance > 10 ) return;
 
-        SetAcceleration?.Invoke(11f/(MathF.Pow(distance+1,2f)));
+        SetAcceleration?.Invoke(100f/(MathF.Pow(distance+1,3f)));
     }
 
     /// <summary>
