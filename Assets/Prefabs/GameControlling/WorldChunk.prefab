@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genObjects:
-  - weight: 5
+  - weight: 4
     genObject: {fileID: 6886510509315943754, guid: 565f8944ff779404a9b8db68b6e46836, type: 3}
-  - weight: 1
+  - weight: 2
     genObject: {fileID: 5594544515722214510, guid: c6f63599cd1fe42a3bccdd9ac9ca6237, type: 3}

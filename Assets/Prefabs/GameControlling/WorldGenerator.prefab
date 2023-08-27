@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chunkPrefab: {fileID: 2467406938686561257, guid: de149f5736b444ef1b03515b160a2315, type: 3}
-  chunkSize: 50
+  chunkSize: 40
   radius: 130
   density: 10
   rejectionSamples: 10
