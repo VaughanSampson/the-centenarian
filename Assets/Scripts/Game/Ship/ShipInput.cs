@@ -24,7 +24,7 @@ public class ShipInput : MonoBehaviour
 
     public void SetToArduinoInput()
     {
-        KeyboardAndMouseInput.Accelerate -= KB_ReceiveIsAccelerating;
+        KeyboardAndMouseInput.Accelerate -= KB_ReceiveIsAcceleration;
         KeyboardAndMouseInput.Trigger -= KB_ReceiveTrigger;
         MainCoroutine.OnMainUpdate -= KB_CalculateAndSendTurn;
 
@@ -36,7 +36,7 @@ public class ShipInput : MonoBehaviour
 
     public void SetToKeyboardInput()
     {
-        KeyboardAndMouseInput.Accelerate += KB_ReceiveIsAccelerating;
+        KeyboardAndMouseInput.Accelerate += KB_ReceiveIsAcceleration;
         KeyboardAndMouseInput.Trigger += KB_ReceiveTrigger;
         MainCoroutine.OnMainUpdate += KB_CalculateAndSendTurn;
 
@@ -47,7 +47,7 @@ public class ShipInput : MonoBehaviour
 
     private void OnDisable()
     {
-        KeyboardAndMouseInput.Accelerate -= KB_ReceiveIsAccelerating;
+        KeyboardAndMouseInput.Accelerate -= KB_ReceiveIsAcceleration;
         KeyboardAndMouseInput.Trigger -= KB_ReceiveTrigger;
         MainCoroutine.OnMainUpdate -= KB_CalculateAndSendTurn;
 
@@ -63,16 +63,16 @@ public class ShipInput : MonoBehaviour
 
     // Keyboard and Mouse Input
 
-    public void KB_ReceiveIsAccelerating(bool a)
+    public void KB_ReceiveIsAcceleration(bool a)
     {
         if (!a)
         {
             SetAcceleration?.Invoke(0);
+            return;
         }
-        else
-        {
-            SetAcceleration?.Invoke(1);
-        }
+
+        float accel = Vector2.Distance(Vector2.zero,KeyboardAndMouseInput.MouseScreenPosition)/Screen.width;
+        SetAcceleration?.Invoke(1);
             
     }
 
