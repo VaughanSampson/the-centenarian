@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,10 +20,12 @@ public class GameController : MonoBehaviour
     [SerializeField] private PauseMenu pauseMenu;
 
     private int score;
+    public static event Action<int> OnScoreChange;
 
     public void AddScore(int amount)
     {
         score += amount;
+        OnScoreChange.Invoke(amount);
     }
 
     private void Start()
