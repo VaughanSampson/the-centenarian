@@ -4,16 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ScoreController : MonoBehaviour
+public class GameMenu : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
-    int inc = 0;
 
-    void Update()
+    private void Start()
     {
-        inc += 1;
-        scoreText.text = "Score: " + inc;
+        GameController.OnScoreChange += UpdateScore;
     }
+
     void UpdateScore(int amount)
     {
         scoreText.text = "Score: " + amount;

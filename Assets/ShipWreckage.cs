@@ -11,5 +11,12 @@ public class ShipWreckage : MonoBehaviour
         {
             piece.Init();
         }
+        GameController.OnReset += DestroySelf;
     }
+    public void DestroySelf()
+    {
+        GameController.OnReset -= DestroySelf;
+        Destroy(this.gameObject);
+    }
+
 }

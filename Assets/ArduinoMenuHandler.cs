@@ -8,7 +8,7 @@ public class ArduinoMenuHandler : MonoBehaviour
 
     private int index = 0;
 
-    private void Start()
+    private void OnEnable()
     {
         Init();
     }
@@ -27,8 +27,7 @@ public class ArduinoMenuHandler : MonoBehaviour
 
 
     public void ChangeButton(int dial)
-    {
-        print(dial);
+    { 
         if (dial > 530)
         {
             index = 0;
@@ -43,12 +42,13 @@ public class ArduinoMenuHandler : MonoBehaviour
             
     }
 
-    private bool trigger;
+    private bool lastTrigger = true;
 
     public void Trigger(bool trigger)
     {
-        if (trigger && !this.trigger)
+        if (trigger && !lastTrigger)
             buttons[index].Call();
+        lastTrigger = trigger;
 
     }
 }
