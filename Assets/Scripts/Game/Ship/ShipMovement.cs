@@ -31,6 +31,7 @@ public class ShipMovement : MonoBehaviour
 
         MainCoroutine.OnMainUpdate += Accelerate;
         MainCoroutine.OnMainUpdate += AddTorque;
+        GameController.OnPausedStateChange += PauseEngine;
 
         if (ArduinoInput.IsDisabled)
             accelerationDecay = 0;
@@ -40,6 +41,7 @@ public class ShipMovement : MonoBehaviour
     {
         MainCoroutine.OnMainUpdate -= Accelerate;
         MainCoroutine.OnMainUpdate -= AddTorque;
+        GameController.OnPausedStateChange -= PauseEngine;
     }
 
     public void SetAccelerate(float acceleration)
@@ -74,4 +76,14 @@ public class ShipMovement : MonoBehaviour
     {
         rigidBody.AddTorque(angularAcceleration * Acceleration / deltaTime);
     }
+
+
+    public void PauseEngine(bool paused)
+    {
+        if(paused)
+            engineAudio.Pause();
+        else
+            engineAudio.UnPause();
+    }
+
 }

@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
 
     private int score;
     public static event Action<int> OnScoreChange;
+    public static event Action<bool> OnPausedStateChange;
 
 
     public static event Action OnReset;
@@ -136,6 +137,7 @@ public class GameController : MonoBehaviour
         pauseMenu.gameObject.SetActive(false);
         Time.timeScale = 1f;
         paused = false;
+        OnPausedStateChange.Invoke(false);
     }
 
     private void Pause()
@@ -143,6 +145,7 @@ public class GameController : MonoBehaviour
         pauseMenu.gameObject.SetActive(true);
         Time.timeScale = 0f;
         paused = true;
+        OnPausedStateChange.Invoke(true);
     }
 
 }

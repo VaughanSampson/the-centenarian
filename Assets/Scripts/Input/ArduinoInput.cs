@@ -31,6 +31,7 @@ public class ArduinoInput : MonoBehaviour
 			serialPort = new SerialPort("COM3", 9600);
 			serialPort.Open();
 			serialPort.ReadTimeout = 1;
+			Cursor.visible = false;
 		}
 		catch
 		{
@@ -39,6 +40,7 @@ public class ArduinoInput : MonoBehaviour
 				serialPort = new SerialPort("/dev/cu.usbmodem1101", 9600);
 				serialPort.Open();
 				serialPort.ReadTimeout = 1;
+				Cursor.visible = false;
 			}
 			catch
 			{
