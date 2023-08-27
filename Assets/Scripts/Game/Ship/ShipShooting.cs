@@ -19,6 +19,12 @@ public class ShipShooting : MonoBehaviour
         MainCoroutine.OnMainUpdate += ShootLoop;
     }
 
+    private void OnDisable()
+    {
+        MainCoroutine.OnMainUpdate -= ShootLoop;
+
+    }
+
     private bool triggerDown;
 
     public void GetTrigger(bool down)
@@ -45,8 +51,7 @@ public class ShipShooting : MonoBehaviour
     }
 
     public void CreateBullet()
-    {
-        print("create bullet");
+    { 
         Bullet bullet = Instantiate(bulletPrefab, this.transform.position, this.transform.rotation);
         bullet.Initiate(rigidBody.velocity);
     }

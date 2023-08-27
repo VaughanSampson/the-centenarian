@@ -29,6 +29,9 @@ public class ShipMovement : MonoBehaviour
 
         MainCoroutine.OnMainUpdate += Accelerate;
         MainCoroutine.OnMainUpdate += AddTorque;
+
+        if (ArduinoInput.IsDisabled)
+            accelerationDecay = 0;
     }
 
     private void OnDisable()

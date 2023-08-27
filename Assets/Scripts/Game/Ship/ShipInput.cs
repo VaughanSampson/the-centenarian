@@ -36,7 +36,6 @@ public class ShipInput : MonoBehaviour
 
     public void SetToKeyboardInput()
     {
-        print("subscribe");
         KeyboardAndMouseInput.Accelerate += KB_ReceiveIsAccelerating;
         KeyboardAndMouseInput.Trigger += KB_ReceiveTrigger;
         MainCoroutine.OnMainUpdate += KB_CalculateAndSendTurn;
@@ -44,6 +43,18 @@ public class ShipInput : MonoBehaviour
         ArduinoInput.SendTrigger -= Arduino_RecieveTrigger;
         ArduinoInput.SendUltrasound -= Arduino_RecieveUltrasound;
         ArduinoInput.SendDial -= Arduino_RecieveDial;
+    }
+
+    private void OnDisable()
+    {
+        KeyboardAndMouseInput.Accelerate -= KB_ReceiveIsAccelerating;
+        KeyboardAndMouseInput.Trigger -= KB_ReceiveTrigger;
+        MainCoroutine.OnMainUpdate -= KB_CalculateAndSendTurn;
+
+        ArduinoInput.SendTrigger -= Arduino_RecieveTrigger;
+        ArduinoInput.SendUltrasound -= Arduino_RecieveUltrasound;
+        ArduinoInput.SendDial -= Arduino_RecieveDial;
+
     }
 
     public event Action<float> SetAcceleration;

@@ -5,6 +5,7 @@ public class KeyboardAndMouseInput : MonoBehaviour
 {
     public static event Action<bool> Trigger;
     public static event Action<bool> Accelerate;
+    public static event Action EscapeCalled;
     public static Vector2 MouseScreenPosition;
     public static Vector2 MouseWorldPosition;
 
@@ -17,6 +18,9 @@ public class KeyboardAndMouseInput : MonoBehaviour
         else
         if (Input.GetKeyUp(KeyCode.E))
             Trigger?.Invoke(false);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            EscapeCalled?.Invoke();
 
         MouseScreenPosition = Input.mousePosition;
         MouseWorldPosition = Camera.main.ScreenToWorldPoint(MouseScreenPosition);
