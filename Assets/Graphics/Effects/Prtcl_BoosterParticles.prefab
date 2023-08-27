@@ -4840,7 +4840,7 @@ GameObject:
   - component: {fileID: 867047069253024923}
   - component: {fileID: 1207435131333691589}
   m_Layer: 0
-  m_Name: GlowLight
+  m_Name: Light_GlowLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
