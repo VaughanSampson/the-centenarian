@@ -15,6 +15,6 @@ public class GameMenu : MonoBehaviour
 
     void UpdateScore(int amount)
     {
-        scoreText.text = "Score: " + amount;
+        scoreText.text = amount.ToString();
     }
 }
