@@ -9,6 +9,8 @@
 /[Tt]emp/
 /[Oo]bj/
 /[Ll]ogs/
+/[Bb]uilds/
+/[Bb]uild/
 /[Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
