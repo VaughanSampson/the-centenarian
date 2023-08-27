@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private MainCameraController mainCameraController;
     [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private ReplayCanvas restartMenu;
 
     private int score;
     public static event Action<int> OnScoreChange;
@@ -37,6 +38,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Init()
     {
+
         shipController = Instantiate(shipControllerPrefab);
         shipController.Init();
 
@@ -51,6 +53,8 @@ public class GameController : MonoBehaviour
         KeyboardAndMouseInput.EscapeCalled += TogglePause;
         if(!ArduinoInput.IsDisabled)
             ArduinoInput.Pause += TogglePause;
+
+        pausable = true;
     }
 
     private void OnDisable()
@@ -61,8 +65,12 @@ public class GameController : MonoBehaviour
 
     public void FinishGame()
     {
+        
+        restartMenu.gameObject.SetActive(true);
+        pausable = false;
+
         // Set high score
-        if(PlayerPrefs.HasKey("HighScore"))
+        if (PlayerPrefs.HasKey("HighScore"))
         {
             if (score > PlayerPrefs.GetInt("HighScore"))
             {
@@ -76,6 +84,7 @@ public class GameController : MonoBehaviour
 
     public void Reset()
     {
+        restartMenu.gameObject.SetActive(false);
         // Destroy old stuff
         if (shipController)
             Destroy(shipController.gameObject);
@@ -88,7 +97,7 @@ public class GameController : MonoBehaviour
     }
 
 
-    private static bool paused = false;
+    private static bool pausable, paused = false;
     public static bool IsPaused { get => paused; }
 
 
@@ -100,7 +109,8 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            Pause();
+            if(pausable)
+                Pause();
         }
     }
 

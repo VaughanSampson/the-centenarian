@@ -13,4 +13,13 @@ public class UraniumCollectable : MonoBehaviour
         transform.localScale *= Random.Range(0.9f, 1.3f);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag=="Player")
+        {
+            GameController.instance.AddScore(Random.Range(5,13));
+            Destroy(this.gameObject);
+        }
+    }
+
 }

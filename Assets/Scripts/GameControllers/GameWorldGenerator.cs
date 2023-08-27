@@ -5,9 +5,6 @@ using System.Linq;
 
 public class GameWorldGenerator : MonoBehaviour
 {
-    private ShipController playerShip;
-    private float loopDelay = 10f;
-
 	[SerializeField] private GameWorldChunk chunkPrefab;
 
 	[SerializeField] private GameWorldChunk[,] chunkMap = new GameWorldChunk[3,3];
@@ -20,8 +17,6 @@ public class GameWorldGenerator : MonoBehaviour
 	public void Init(ShipController playerShip)
     {
 		InitialLoad(Vector2.zero);
-		StartCoroutine("GenerationLoop");
-        this.playerShip = playerShip;
     }
 
 	public void InitialLoad(Vector2 centre)
@@ -43,37 +38,6 @@ public class GameWorldGenerator : MonoBehaviour
 		chunkMap[i, j].InitLoad(size, radius, rejectionSamples, density);
 	}
 
-    IEnumerator GenerationLoop()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(loopDelay);
-            //Vector2 center = playerShip.transform.position;
-        }
-    }
-
-    public void ReloadIfNeeded(Vector2 center)
-	{
-		/*
-		if(center.x - chunkSize * 2 > chunkMap[0,0].transform.position.x )
-        {
-
-        }
-		else
-		if (center.x + chunkSize * 2 < chunkMap[2, 2].transform.position.x)
-		{
-
-		}
-		*/
-	}
-
-
-    public void LoadNew(Vector2 center)
-    {
-		
-    }
-
-
 
 }
 
@@ -87,6 +51,7 @@ public static class PerlinNoiseFiltering{
     {
 		Vector2[] pointsArray = points.ToArray();
 		return pointsArray.Where(point => {
+			if (Vector2.Distance(basePosition+point, Vector2.zero) < 20) return false;
 
 			float noisePoint = GetNoisePoint(basePosition + point, spread);
 			if (point.x < edgeFilterWidth)
