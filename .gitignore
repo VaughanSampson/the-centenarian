@@ -5,13 +5,12 @@
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 [Ll]ibrary/
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Ll]ogs/
-/[Bb]uilds/
-/[Bb]uild/
-/[Uu]ser[Ss]ettings/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -58,16 +57,18 @@ ExportedObj/
 # Unity3D generated file on crash reports
 sysinfo.txt
 
+# Builds
+*.apk
+*.aab
+*.unitypackage
+*.app
+
 # Crashlytics generated file
 crashlytics-build.properties
 
 # Packed Addressables
-/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-.vsconfig
-hacked-together-game/Packages/packages-lock.json
-hacked-together-game/Logs/Packages-Update.log
-hacked-together-game/Packages/manifest.json
