@@ -16,6 +16,7 @@ The game is simple, generating an asteroid belt with Poisson disc sampling and P
 <br><br>
 
 ## Arduino Controller
+![The_Centenarian_Controller](https://github.com/VaughanSampson/the-centenarian/assets/128713660/cd084df2-dced-4edb-aa66-0449b1d41760)
 The controller requires an ultrasound range finder, a potentiometer and 2 buttons. The closer something is to the ultrasound detector, the faster acceleration is, so the "virtual cockpit" has an acceleration handle which can slide to and from the ultrasound detector. The potentiometer is used as a steering wheel and in menu selection, so a screw driver extrudes vertically from the "virtual cockpit," attached to the potentiometer. 1 button (the firing button) is fitted under the potentiometer to trigger when the potentiometer is pressed down (the screwdriving is pushed down). Lastly another button is simply used to pause and unpause the game.
 <br><br>
 
