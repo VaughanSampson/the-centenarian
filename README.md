@@ -12,7 +12,7 @@ https://github.com/VaughanSampson/the-centenarian/assets/128713660/131ce5a7-46f5
 <br><br>
 
 ## Unity Game
-The game is simple, generating an asteroid belt with Poisson disc sampling and Perlin noise. Most asteroids are large and must be avoided but others are small and can be shot at and destroyed. The scene is dark and the player ship has to utilise the front light to see objects.
+The game is simple, generating an asteroid belt with Poisson disc sampling and Perlin noise. Most asteroids are large and must be avoided but others are small and can be shot at and destroyed for Uranium (score). The scene is dark and the player ship has to utilise the ship's front light to see objects, creating a cool visual and intimidating exploration.
 <br><br>
 
 ## Arduino Controller
@@ -20,5 +20,5 @@ The controller requires an ultrasound range finder, a potentiometer and 2 button
 <br><br>
 
 ## Keyboard Controller
-The unity game can also take keyboard input for testing purposes, but this does not function like the Arduino controller.
+The unity game can also take keyboard input for testing purposes, but this does not function like the Arduino controller. 'E' is shoot. Space-bar is used to accelerate, and the mouse's position is used to affect acceleration speed and turning speed.
 
