@@ -1,5 +1,5 @@
 # The Centenarian
-**Winner of the "People's Choice" award at the 2023 University of Queensland hackathon.**
+##Winner of the "People's Choice" award at the 2023 University of Queensland hackathon.
 <br><br>
 _The Centenarian_ is a project to create a "virtual cockpit" controller which is satisfying to use in controlling a spaceship in a 2D environment. Built in Unity, this game is designed to take Arduino controls. You play as the captain of a 100 year old ship made of scrap metal, exploring space to find Uranium ores after nuclear war destroyed Earth.
 
