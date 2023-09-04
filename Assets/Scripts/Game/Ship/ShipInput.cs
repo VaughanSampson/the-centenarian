@@ -63,17 +63,17 @@ public class ShipInput : MonoBehaviour
 
     // Keyboard and Mouse Input
 
-    public void KB_ReceiveIsAcceleration(bool a)
+    public void KB_ReceiveIsAcceleration(bool isAccelerating)
     {
-        if (!a)
+        if (!isAccelerating)
         {
             SetAcceleration?.Invoke(0);
             return;
         }
 
-        float accel = Vector2.Distance(Vector2.zero,KeyboardAndMouseInput.MouseScreenPosition)/Screen.width;
-        SetAcceleration?.Invoke(1);
-            
+        // Modifier to be accelerate more when the mouse is further from the ship at the screen's center.
+        float accelMod = 2 *Vector2.Distance(new Vector2(Screen.width/2,Screen.height/2), KeyboardAndMouseInput.MouseScreenPosition)/Screen.width;
+        SetAcceleration?.Invoke(accelMod);
     }
 
     public void KB_ReceiveTrigger(bool down)
