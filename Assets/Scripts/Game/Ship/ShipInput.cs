@@ -71,9 +71,7 @@ public class ShipInput : MonoBehaviour
             return;
         }
 
-        // Modifier to be accelerate more when the mouse is further from the ship at the screen's center.
-        float accelMod = 2 *Vector2.Distance(new Vector2(Screen.width/2,Screen.height/2), KeyboardAndMouseInput.MouseScreenPosition)/Screen.width;
-        SetAcceleration?.Invoke(accelMod);
+        SetAcceleration?.Invoke(1);
     }
 
     public void KB_ReceiveTrigger(bool down)
@@ -85,12 +83,11 @@ public class ShipInput : MonoBehaviour
     {
         var dir = (Vector3)KeyboardAndMouseInput.MouseWorldPosition - lookSensor.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        lookSensor.rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
+        lookSensor.rotation = Quaternion.AngleAxis(angle+90, Vector3.forward);
         float zDif = lookSensor.localEulerAngles.z;
-        zDif -= 180;
-        SetAngularAcceleration?.Invoke(-zDif * deltaTime);
+        zDif -= 180; 
+        SetAngularAcceleration?.Invoke(zDif * deltaTime);
     }
-
 
     // Arduino Input
 

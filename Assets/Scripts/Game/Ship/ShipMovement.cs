@@ -45,7 +45,7 @@ public class ShipMovement : MonoBehaviour
     }
 
     public void SetAccelerate(float acceleration)
-    {
+    { 
         this.acceleration = acceleration * speed;
     }
 
@@ -61,10 +61,21 @@ public class ShipMovement : MonoBehaviour
         if (acceleration > 0)
             acceleration -= accelerationDecay * deltaTime;
         else
-            acceleration = 0;
+        {
+            engineAudio.volume = 0;
+            return;
+        }
 
-        engineAudio.volume = Mathf.Min(acceleration / 100f, 1f);
-        rigidBody.AddForce(acceleration * deltaTime * transform.up);
+
+        // Control audio from movement script (madness!)
+
+        // Modifier to accelerate ship more when the mouse is further from the ship at the screen's center. 
+        float accelMod = Vector2.Distance(new Vector2(Screen.width / 2, Screen.height / 2), KeyboardAndMouseInput.MouseScreenPosition);
+        accelMod = Mathf.Min(accelMod, Screen.height/2) * 4f;
+        accelMod /= Screen.height;
+        float trueAcceleration = acceleration * accelMod;
+        engineAudio.volume = Mathf.Min(trueAcceleration / 140f, 1f);
+        rigidBody.AddForce(trueAcceleration * deltaTime * transform.up);
     }
 
     public void Trigger(bool down)
