@@ -12,7 +12,7 @@ https://github.com/VaughanSampson/the-centenarian/assets/128713660/131ce5a7-46f5
 <br><br>
 
 ## Unity Game
-The game is simple, generating an asteroid belt with Poisson disc sampling and Perlin noise. Most asteroids are large and must be avoided but others are small and can be shot at and destroyed for Uranium (score). The scene is dark and the player ship has to utilise the ship's front light to see objects, creating a cool visual and intimidating exploration.
+The game is simple, generating an asteroid belt with Poisson disc sampling and Perlin noise. Most asteroids are large and must be avoided but others are small and can be shot at and destroyed for Uranium (score). The scene is dark and the player ship has to utilise the ship's front light to see objects, creating an atmospheric visual and intimidating exploration.
 <br><br>
 
 ## Arduino Controller
